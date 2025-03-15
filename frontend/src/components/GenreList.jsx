@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import GlobalApi from "../Services/GlobalApi";
 
-const GenreList = () => {
+const GenreList = ({ genereId, selectedGenresName }) => {
   const [genreList, setGenreList] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -11,7 +11,6 @@ const GenreList = () => {
 
   const getGenreList = () => {
     GlobalApi.getGenreList.then((resp) => {
-      //   console.log(resp.data.results);
       setGenreList(resp.data.results);
     });
   };
@@ -22,9 +21,13 @@ const GenreList = () => {
       {genreList.map((item, index) => (
         <div
           key={index}
-          onClick={() => setActiveIndex(index)}
-          className={`flex group gap-2 items-center mb-2 rounded-2xl cursor-pointer hover:bg-purple-800 p-2 hover:dark:bg-purple-800 ${
-            activeIndex === index ? "bg-purple-800 dark:bg-purple-800" : null
+          onClick={() => {
+            setActiveIndex(index);
+            genereId(item.id);
+            selectedGenresName(item.name);
+          }}
+          className={`flex group gap-2 items-center mb-2 rounded-2xl cursor-pointer hover:bg-yellow-200 p-2 hover:dark:bg-yellow-200 ${
+            activeIndex === index ? "bg-yellow-200 dark:bg-yellow-200" : null
           }`}
         >
           <img
@@ -35,7 +38,7 @@ const GenreList = () => {
             }`}
           />
           <h3
-            className={`dark:text-yellow-600 text-[18px] group-hover:font-bold transition-all ease-out duration-400 ${
+            className={`dark:text-purple-600 text-[18px] group-hover:font-bold transition-all ease-out duration-400 ${
               activeIndex === index ? "font-bold" : null
             }`}
           >

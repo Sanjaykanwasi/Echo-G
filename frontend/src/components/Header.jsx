@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { HiMiniMoon } from "react-icons/hi2";
 import { HiMiniSun } from "react-icons/hi2";
@@ -23,12 +23,18 @@ const Header = () => {
       <div>
         {theme === "light" ? (
           <HiMiniMoon
-            onClick={() => setTheme("dark")}
+            onClick={() => {
+              setTheme("dark");
+              localStorage.setItem("theme", "dark");
+            }}
             className="text-[55px] bg-purple-200 p-1 cursor-pointer rounded-full text-black"
           />
         ) : (
           <HiMiniSun
-            onClick={() => setTheme("light")}
+            onClick={() => {
+              setTheme("light");
+              localStorage.setItem("theme", "light");
+            }}
             className="text-[55px] bg-purple-200 p-1 cursor-pointer rounded-full text-black"
           />
         )}

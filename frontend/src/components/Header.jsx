@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { HiMiniMoon } from "react-icons/hi2";
 import { HiMiniSun } from "react-icons/hi2";
 
 import logo from "../assets/logo.png";
+import { ThemeContext } from "../Context/ThemeContext";
 
 const Header = () => {
-  const [toggleMode, setToggleMode] = useState(true);
+  const { theme, setTheme } = useContext(ThemeContext);
 
   return (
     <div className="flex items-center justify-between w-full p-4 ">
@@ -20,14 +21,14 @@ const Header = () => {
         />
       </div>
       <div>
-        {toggleMode ? (
+        {theme === "light" ? (
           <HiMiniMoon
-            onClick={() => setToggleMode(!toggleMode)}
+            onClick={() => setTheme("dark")}
             className="text-[55px] bg-purple-200 p-1 cursor-pointer rounded-full text-black"
           />
         ) : (
           <HiMiniSun
-            onClick={() => setToggleMode(!toggleMode)}
+            onClick={() => setTheme("light")}
             className="text-[55px] bg-purple-200 p-1 cursor-pointer rounded-full text-black"
           />
         )}
